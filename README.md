@@ -29,6 +29,12 @@ If you want to replicate our results, we provide network weights for each agent 
 
 ## Brief Synopsis
 
+Fixture layout planning is the process of designing the layout for components undergoing a manufacturing task such as drilling or riveting ([Pehlivan & Summers, 2006](https://www.tandfonline.com/doi/abs/10.1080/00207540600865386)). In this process, the method aims to find positions for fixtures in such a way that they minimise any deformation or residual stresses that the component experiences during the task:
+$$
+\underset{\tau}{\text{minimise }} |f_w(\tau)|
+$$
+Traditional methods have relied on optimisation techniques that search for a global minima in fixture positions that minimise the experienced deformation. 
+
 <a id='3'></a>
 
 ## Manual Installation
@@ -48,7 +54,7 @@ If you want to replicate our results, we provide network weights for each agent 
 If you want to cite this work, please refer to our preprint on TechXriv:
 
 ```bibtex
- @article{marl_fixtures, 
+ @article{marl_fixtures_preprint_2023, 
     type={preprint}, 
     title={Decision Making For Multi-Robot Fixture Planning Using Multi Agent Reinforcement Learning}, 
     DOI={10.36227/techrxiv.24171534.v1}, 
@@ -58,7 +64,6 @@ If you want to cite this work, please refer to our preprint on TechXriv:
     month=oct, 
     language={en} 
  }
-
 ```
 
 Any questions, please forward them to: <ecanzini1@sheffield.ac.uk>. If you want to use our approach and want advice, feel free to reach out!
