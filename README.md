@@ -9,10 +9,11 @@
 ## Contents
 
 - [Overview](#1)
-- [Manual Installation & Training](#2)
-- [Docker Container](#3)
-- [Troubleshooting](#4)
-- [Citing This Work](#5)
+- [Brief Synopsis](#2)
+- [Manual Installation](#3)
+- [Docker Container](#4)
+- [Troubleshooting](#5)
+- [Citing This Work](#6)
 
 <a id='1'></a>
 
@@ -26,17 +27,21 @@ If you want to replicate our results, we provide network weights for each agent 
 
 <a id='2'></a>
 
-## Manual Installation & Training
+## Brief Synopsis
 
 <a id='3'></a>
 
-## Docker Container
+## Manual Installation
 
 <a id='4'></a>
 
-## Troubleshooting
+## Docker Container
 
 <a id='5'></a>
+
+## Troubleshooting
+
+<a id='6'></a>
 
 ## Citing This Work
 
