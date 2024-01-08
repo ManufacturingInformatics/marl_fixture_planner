@@ -2,11 +2,15 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
+<p align="center">
+  <img src="mafp_design.png" width="700">
+</p>
+
 ## Contents
 
 - [Overview](#1)
-- [First Method: Manual Installation & Training](#2)
-- [Second Method: Docker Container](#3)
+- [Manual Installation & Training](#2)
+- [Docker Container](#3)
 - [Troubleshooting](#4)
 - [Citing This Work](#5)
 
@@ -18,13 +22,15 @@ This is the repository to go along with the paper "Decision Making For Multi-Rob
 
 This repo is split into two sections. The first requires the setup of the MATLAB Runtime and installation of Python packages in a virtual environment. This process is more complicated and may not work on older machines. The second (far easier) method is to use the Docker runtime and provided Docker image to run the training and inference process.
 
+If you want to replicate our results, we provide network weights for each agent from 1 to 11, with additional results regarding the determination of a Nash equilibrium in a single-stage game.
+
 <a id='2'></a>
 
-## First Method: Manual Installation & Training
+## Manual Installation & Training
 
 <a id='3'></a>
 
-## Second Method: Docker Container
+## Docker Container
 
 <a id='4'></a>
 
