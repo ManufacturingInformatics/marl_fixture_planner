@@ -3,7 +3,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 <p align="center">
-  <img src="mafp_design.png" width="700">
+  <img src="assets/mafp_architecture.png" width="700">
 </p>
 
 ## Contents
