@@ -99,24 +99,26 @@ export LD_LIBRARY_PATH="${LD_LIBRARY_PATH:+${LD_LIBRARY_PATH}:}\
 
 To install the necessary packages, it is recommended to use a virtual environment such as Ananconda or virtualenv. We will use Anaconda commands in this repo, but these could be substituted for other commands.
 
-In the top level directory, use the provided `environment.yml` file to install all the necessary Python packages:
+In the `manual` directory, use the provided `environment.yml` file to install all the necessary Python packages:
 
 ```
 conda env create -f environment.yml
 ```
 
-Once this is done, execute the following commands to install the wing panel FEA simulator package and the similar package for the wing spar FEA simulator:
+Once this is done, from the top level of this git repository, execute the following commands to install the wing panel FEA simulator package and the similar package for the wing spar FEA simulator:
 
 ```
 # For the wing panel simulator
 cd ./manual/calculateDeformationMARLTEST/for_redistribution_files_only
 python3 setup.py install
 
-# For the wing panel simulator
+# For the wing spar simulator
 cd ./manual/calculateDeformationMARLSpar/for_redistribution_files_only
 python3 setup.py install
-
 ```
+
+The installation of the packages can be tested by running `import calculateDeformationMARL<type>` into a Python CLI instance, where `<type>` dictates either the panel (TEST) or spar (Spar) packages.
+
 <a id='3c'></a>
 
 ### Training
