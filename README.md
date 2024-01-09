@@ -34,8 +34,14 @@ $$\underset{\tau}{\text{minimise }} |f_w(\tau)|$$
 Traditional methods have relied on optimisation techniques that search for a global minima in fixture positions that minimise the experienced deformation. However, these optimisation methods frequently enter local minima and believe they have found the global solution.
 
 Reinforcement learning is a machine learning technique that seeks to learn optimal behaviour by having an agent interact within an environment and learn which actions produce the best rewards ([Sutton & Barto, 2018](http://incompleteideas.net/book/the-book-2nd.html)). In the multi-agent setting, the agents are seeking to maximise the global value function of all agents:
+```math
+V^n_{\pi^n, \boldsymbol{\pi}^{-n}}(s) = \mathbb{E}_{a_{t+1} \sim P, \boldsymbol{a}_t \sim \boldsymbol{\pi}} \left [ \sum_{t=0}^\infty \gamma^t R^n_t | s_0 = s\right ]
+```
 $$V^n_{\pi^n, \boldsymbol{\pi}^{-n}}(s) = \mathbb{E}_{a_{t+1} \sim P, \boldsymbol{a}_t \sim \boldsymbol{\pi}} \left [ \sum_{t=0}^\infty \gamma^t R^n_t | s_0 = s\right ]$$
 Due to the multi-agent setting, RL practitioners seek to embed game-theoretic guarantees in the learning stage of the agents. However, some instances only see global rewards returned to the agents, which leads to a field known as "team theory". Similar to game theory, it covers the cooperation of agents where the reward at each state is a function of the actions of all agents with no individual rewards. This leads to a player-by-player equilibrium, which is identical in nature to the Nash equilibrium ([van Schuppen, 2014](https://link.springer.com/chapter/10.1007/978-3-319-10407-2_18)):
+```math
+J(\{a^*_n, \boldsymbol{a}^*_{-n}\}) \leq J(\{a_n, \boldsymbol{a}^*_{-n}\})
+```
 $$J(\{a^*_n, \boldsymbol{a}^*_{-n}\}) \leq J(\{a_n, \boldsymbol{a}^*_{-n}\})$$
 
 <a id='3'></a>
