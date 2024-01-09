@@ -11,6 +11,10 @@
 - [Overview](#1)
 - [Brief Synopsis](#2)
 - [Manual Installation](#3)
+  - [MATLAB Runtime Installation](#3a)
+  - [Package Installation](#3b)
+  - [Training](#3c)
+  - [Inference](#3d)
 - [Docker Container](#4)
 - [Troubleshooting](#5)
 - [Citing This Work](#6)
@@ -61,11 +65,63 @@ In this work we use reinforcement learning alongside team theory to create a mul
 
 ## Manual Installation
 
+This work is built on two pillars: an FEA simulator developed in MATLAB and a multi-agent reinforcement learning process developed in Python. The system specs that the model was trained on is as follows:
+
+```
+OS: Ubuntu 20.04 LTS
+Python Version: 3.10.10
+GPU: NVIDIA GeForce RTX 3080
+CPU: Intel Core i9-10920X 12C/24T
+RAM: 64 GB
+```
+
+This work has only been tested on Ubuntu - there is currently no support for Windows and no plan to add support. Please submit a PR if wish to add Windows support.
+
+<a id='3a'></a>
+
 ### MATLAB Runtime Installation
+
+For starting the manual installation, firstly the MATALB runtime engine must be installed as it is used for the FEA simulation within the environment. The version of the runtime that the package was built with is R2023a and can be downloaded from here: [MATLAB Runtime R2023a](https://ssd.mathworks.com/supportfiles/downloads/R2023a/Release/5/deployment_files/installer/complete/win64/MATLAB_Runtime_R2023a_Update_5_win64.zip).
+
+Once you have downloaded the runtime, you can follow the instructions to install the runtime. The key part is to ensure that you retain the command shown below. This command is non-permanent and needs to be run every time a new terminal window is opened. Alternatively you can add this to your `~/.bashrc`.
+
+```
+export LD_LIBRARY_PATH="${LD_LIBRARY_PATH:+${LD_LIBRARY_PATH}:}\ 
+  /path/to/install/dir/R2023a/runtime/glnxa64:\
+  /path/to/install/dir/R2023a/bin/glnxa64:\
+  /path/to/install/dir/R2023a/sys/os/glnxa64:\
+  /path/to/install/dir/R2023a/extern/bin/glnxa64"
+```
+
+<a id='3b'></a>
 
 ### Package Installation
 
+To install the necessary packages, it is recommended to use a virtual environment such as Ananconda or virtualenv. We will use Anaconda commands in this repo, but these could be substituted for other commands.
+
+In the top level directory, use the provided `environment.yml` file to install all the necessary Python packages:
+
+```
+conda env create -f environment.yml
+```
+
+Once this is done, execute the following commands to install the wing panel FEA simulator package and the similar package for the wing spar FEA simulator:
+
+```
+# For the wing panel simulator
+cd ./manual/calculateDeformationMARLTEST/for_redistribution_files_only
+python3 setup.py install
+
+# For the wing panel simulator
+cd ./manual/calculateDeformationMARLSpar/for_redistribution_files_only
+python3 setup.py install
+
+```
+<a id='3c'></a>
+
 ### Training
+
+<a id='3d'></a>
 
 ### Inference
 
