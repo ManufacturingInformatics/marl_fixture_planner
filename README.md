@@ -49,11 +49,25 @@ Due to the multi-agent setting, RL practitioners seek to embed game-theoretic gu
 J(\{a^*_n, \boldsymbol{a}^*_{-n}\}) \leq J(\{a_n, \boldsymbol{a}^*_{-n}\})
 ```
 
+When using robotic fixture elements, the elements can be reconfigured to multiple different drilling tasks and can find optimal fixture plans that can reduce deformation across multiple different positions.
 
+<p align="center">
+  <img src="assets/Multi-Robot Fixtures For Milling.png" width="400">
+</p>
+
+In this work we use reinforcement learning alongside team theory to create a mulit-agent framework for determining optimal fixture placement for multiple drilling tasks on aerospace components.
 
 <a id='3'></a>
 
 ## Manual Installation
+
+### MATLAB Runtime Installation
+
+### Package Installation
+
+### Training
+
+### Inference
 
 <a id='4'></a>
 
