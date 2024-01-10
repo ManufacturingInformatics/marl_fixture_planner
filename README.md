@@ -41,7 +41,7 @@ Fixture layout planning is the process of designing the layout for components un
 
 Traditional methods have relied on optimisation techniques that search for a global minima in fixture positions that minimise the experienced deformation. However, these optimisation methods frequently enter local minima and believe they have found the global solution.
 
-Reinforcement learning is a machine learning technique that seeks to learn optimal behaviour by having an agent interact within an environment and learn which actions produce the best rewards ([Sutton & Barto, 2018](http://incompleteideas.net/book/the-book-2nd.html)). In the multi-agent setting, the agents are seeking to maximise the global value function of all agents:
+Reinforcement learning is a machine learning technique that seeks to learn optimal behaviour by having an agent interact within an environment and learn which actions produce the best rewards ([Sutton & Barto, 2018](http://incompleteideas.net/book/the-book-2nd.html)). In the multi-agent setting infinite-horizon setting, the agents are seeking to maximise their individual value function with respect to the other agents:
 
 ```math
 V^n_{\pi^n, \boldsymbol{\pi}^{-n}}(s) = \mathbb{E}_{a_{t+1} \sim P, \boldsymbol{a}_t \sim \boldsymbol{\pi}} \left [ \sum_{t=0}^\infty \gamma^t R^n_t | s_0 = s\right ]
@@ -107,13 +107,13 @@ conda env create -f environment.yml
 
 Once this is done, from the top level of this git repository, execute the following commands to install the wing panel FEA simulator package and the similar package for the wing spar FEA simulator:
 
-```
+```shell
 # For the wing panel simulator
-cd ./manual/calculateDeformationMARLTEST/for_redistribution_files_only
+cd ./manual/train/calculateDeformationMARLTEST/for_redistribution_files_only
 python3 setup.py install
 
 # For the wing spar simulator
-cd ./manual/calculateDeformationMARLSpar/for_redistribution_files_only
+cd ./manual/train/calculateDeformationMARLSpar/for_redistribution_files_only
 python3 setup.py install
 ```
 
@@ -122,6 +122,22 @@ The installation of the packages can be tested by running `import calculateDefor
 <a id='3c'></a>
 
 ### Training
+
+For training the models, we provide a shell script that can be used to start a training process for both the spar and the panel models. Execute the following command in the `/path/to/repo/manual/scripts/` folder:
+
+```shell
+./train_mafp.sh -e <env> -r <num runs> -n <num agents>
+```
+
+Where `env` is the environment to run (either panel or spar), `<num runs>` is the number of runs of the framework to run and `<num agents>` is the number of agents to use per run. These cannot be changed between runs. All hyperparameters are kept in the runner file. 
+
+If you are using [Weights & Biases](https://wandb.ai/site) for logging, there are two optional arguments to pass that are required for logging:
+
+```shell
+./train_mafp.sh -e <env> -r <num runs> -n <num agents> -w -i <wandb identity>
+```
+
+Where `wandb identity` is your W&B account ID. Project name and run numbers are handled by the program config. All runs save the episodic reward, regret and step TD loss in CSV files, along with a `.pt` file for each agent containing network weights. 
 
 <a id='3d'></a>
 

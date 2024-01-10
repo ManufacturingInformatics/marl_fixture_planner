@@ -1,9 +1,0 @@
-Metadata-Version: 2.1
-Name: calculateDeformationMARLSpar-R2023a
-Version: 9.14
-Summary: A Python interface to calculateDeformationMARLSpar
-Home-page: https://www.mathworks.com/
-Author: MathWorks
-Platform: Linux
-Platform: Windows
-Platform: macOS

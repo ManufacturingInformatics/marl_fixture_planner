@@ -1,7 +1,0 @@
-setup.py
-calculateDeformationMARLSpar/__init__.py
-calculateDeformationMARLSpar/calculateDeformationMARLSpar.ctf
-calculateDeformationMARLSpar_R2023a.egg-info/PKG-INFO
-calculateDeformationMARLSpar_R2023a.egg-info/SOURCES.txt
-calculateDeformationMARLSpar_R2023a.egg-info/dependency_links.txt
-calculateDeformationMARLSpar_R2023a.egg-info/top_level.txt

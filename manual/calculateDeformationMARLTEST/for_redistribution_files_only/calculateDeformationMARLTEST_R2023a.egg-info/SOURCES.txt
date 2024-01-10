@@ -1,7 +1,0 @@
-setup.py
-calculateDeformationMARLTEST/__init__.py
-calculateDeformationMARLTEST/calculateDeformationMARLTEST.ctf
-calculateDeformationMARLTEST_R2023a.egg-info/PKG-INFO
-calculateDeformationMARLTEST_R2023a.egg-info/SOURCES.txt
-calculateDeformationMARLTEST_R2023a.egg-info/dependency_links.txt
-calculateDeformationMARLTEST_R2023a.egg-info/top_level.txt
