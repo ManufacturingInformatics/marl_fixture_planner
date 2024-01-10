@@ -1,9 +1,3 @@
-"""
-Nash-Q Learning for Multi-Agent Fixture assignment
-
-There are n agents in the policy, making there n Q-tables (or networks used in this method). As noted by Hu et al. (2003), the total space requirement and therefore overall complexity is n|S|.|A|^n. 
-"""
-
 import numpy as np
 import torch
 import math
