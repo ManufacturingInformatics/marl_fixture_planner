@@ -36,7 +36,7 @@ If you want to replicate our results, we provide network weights for each agent 
 Fixture layout planning is the process of designing the layout for components undergoing a manufacturing task such as drilling or riveting ([Pehlivan & Summers, 2006](https://www.tandfonline.com/doi/abs/10.1080/00207540600865386)). In this process, the method aims to find positions for fixtures $A^*$ in such a way that they minimise any deformation or residual stresses that the component experiences during the task:
 
 ```math
-A^* \in \argmin_{A \subseteq \mathcal{A}} |f_w(\tau)|
+A^* \in \underset{A \subseteq \mathcal{A}}{\text{argmin }} |f_w(\tau)|
 ```
 
 Traditional methods have relied on optimisation techniques that search for a global minima in fixture positions that minimise the experienced deformation. However, these optimisation methods frequently enter local minima and believe they have found the global solution.
@@ -67,7 +67,7 @@ In this work we use reinforcement learning alongside team theory to create a mul
 
 This work is built on two pillars: an FEA simulator developed in MATLAB and a multi-agent reinforcement learning process developed in Python. The system specs that the model was trained on is as follows:
 
-```
+```shell
 OS: Ubuntu 20.04 LTS
 Python Version: 3.10.10
 GPU: NVIDIA GeForce RTX 3080
@@ -85,7 +85,7 @@ For starting the manual installation, firstly the MATALB runtime engine must be 
 
 Once you have downloaded the runtime, you can follow the instructions to install the runtime. The key part is to ensure that you retain the command shown below. This command is non-permanent and needs to be run every time a new terminal window is opened. Alternatively you can add this to your `~/.bashrc`.
 
-```
+```shell
 export LD_LIBRARY_PATH="${LD_LIBRARY_PATH:+${LD_LIBRARY_PATH}:}\ 
   /path/to/install/dir/R2023a/runtime/glnxa64:\
   /path/to/install/dir/R2023a/bin/glnxa64:\
@@ -101,7 +101,7 @@ To install the necessary packages, it is recommended to use a virtual environmen
 
 In the `manual` directory, use the provided `environment.yml` file to install all the necessary Python packages:
 
-```
+```shell
 conda env create -f environment.yml
 ```
 
