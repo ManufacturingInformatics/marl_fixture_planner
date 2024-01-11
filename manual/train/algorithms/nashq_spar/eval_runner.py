@@ -26,15 +26,11 @@ LR = 1e-4
 
 class Evaluator:
     
-    def __init__(self):
-        
-        parser = argparse.ArgumentParser()
-        parser.add_argument('--num_agents', type=int)
-        parser.add_argument('--num_runs', type=int)
-        parser.add_argument('--run_name')
-        args = parser.parse_args()
+    def __init__(self, **kwargs):
         
         self.config = {}
+        self.run_name = kwargs['run_name']
+        self.num_runs = kwargs['num_runs']
         self.config['device'] = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.config['batch size'] = BATCH_SIZE
         self.config['LR'] = LR
@@ -42,18 +38,20 @@ class Evaluator:
         self.config['TAU'] = TAU
         self.config['steps done'] = 0
         self.config['eps threshold'] = EPS_START
-        self.num_runs = args.num_runs
-        self.run_name = args.run_name
         print(f"Using device {self.config['device']}")
         
         self.contexts = create_contexts()
         np.random.shuffle(self.contexts)
         self.actions = create_actions()
-        self.env = MultiAgentFixtureBandit(self.contexts, self.actions, num_agents=args.num_agents)
+        self.env = MultiAgentFixtureBandit(self.contexts, self.actions, num_agents=kwargs['num_agents'])
         
-        self.reward_storage = f'./runs_csv/wing_spar/marl_{self.env.num_agents}_agents/evaluation/rewards_{self.run_name}.csv'
+        self.reward_storage = f'../runs_csv/wing_spar/marl_{self.env.num_agents}_agents/evaluation/rewards_{self.run_name}.csv'
         
-        parent_dir = "./runs_csv/wing_spar"
+        self.action_storage = f'../runs_csv/wing_panel/marl_{self.env.num_agents}_agents/evaluation/actions.csv'
+        
+        self.context_storage = f'../runs_csv/wing_panel/marl_{self.env.num_agents}_agents/evaluation/contexts.csv'
+        
+        parent_dir = "../runs_csv/wing_spar"
         dir_name = f"marl_{str(self.env.num_agents)}_agents" 
         path = os.path.join(parent_dir, dir_name)
         if os.path.isdir(path) is False:
@@ -78,7 +76,7 @@ class Evaluator:
         for i in range(self.env.num_agents):
             agent_id = 'agent' + str(i)
             self.agents[agent_id] = Agent(agent_id, self.env.contexts, self.agent_action_space, self.config)
-            self.agents[agent_id].policy_net.load_state_dict(torch.load(f'./runs_csv/wing_spar/marl_{self.env.num_agents}_agents/run_{self.run_name}/agent_{agent_id}_dict.pt', map_location=self.config['device']))
+            self.agents[agent_id].policy_net.load_state_dict(torch.load(f'../train/agent_weights/wing_spar/marl_{self.env.num_agents}_agents/run_{self.run_name}/agent_{agent_id}_dict.pt', map_location=self.config['device']))
             self.agents_offset[agent_id] = i*num_split_actions
             
         try:

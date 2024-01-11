@@ -42,8 +42,8 @@ class Runner:
         self.contexts = create_contexts()
         self.actions = create_actions()
         self.env = MultiAgentFixtureBandit(self.contexts, self.actions, num_agents=kwargs['num_agents'])
-        self.td_file = f'../runs_csv/marl_{self.env.num_agents}_agents/run_{self.run_num}/td_loss_{datetime.now().strftime("%d-%m-%Y")}.csv'
-        self.rewards_file = f'../runs_csv/marl_{self.env.num_agents}_agents/run_{self.run_num}/rewards_{datetime.now().strftime("%d-%m-%Y")}.csv'
+        self.td_file = f'../runs_csv/wing_panel/marl_{self.env.num_agents}_agents/run_{self.run_num}/td_loss_{datetime.now().strftime("%d-%m-%Y")}.csv'
+        self.rewards_file = f'../runs_csv/wing_panel/marl_{self.env.num_agents}_agents/run_{self.run_num}/rewards_{datetime.now().strftime("%d-%m-%Y")}.csv'
         
         if self.wandb:
             wandb_config = {
@@ -80,7 +80,7 @@ class Runner:
             self.agents[agent_id] = Agent(agent_id, self.env.contexts, self.agent_action_space, self.config)
             self.agents_offset[agent_id] = i*num_split_actions
             
-        parent_dir = "../runs_csv"
+        parent_dir = "../runs_csv/wing_panel"
         dir_name = f"marl_{str(self.env.num_agents)}_agents" 
         path = os.path.join(parent_dir, dir_name)
         if os.path.isdir(path) is False:
@@ -168,15 +168,15 @@ class Runner:
                     if loss is not None:
                         agent_losses.append(loss.cpu().detach().numpy())
                         # self.writer.add_scalar("train/{}_loss".format(id), scalar_value=loss, global_step=self.config['steps done'])
-                        wandb.log(
-                            {"loss/{}_loss".format(id): loss},
-                            step=self.config['steps done']
-                        )
+                        if self.wandb:
+                            wandb.log(
+                                {"loss/{}_loss".format(id): loss},
+                                step=self.config['steps done']
+                            )
                 
                 with open(self.td_file, 'a', encoding='UTF8') as f:
                     csv_file = csv.writer(f)
-                    csv_file.writerow(agent_losses)
-                                
+                    csv_file.writerow(agent_losses)                   
                 
                 postfix['total reward'] += reward
                     
@@ -191,7 +191,7 @@ class Runner:
                     "metrics/regret": postfix['episode regret']
                 }
             
-            wandb.log(log_dict)
+                wandb.log(log_dict)
             
             with open(self.rewards_file, 'a') as f:
                 csv_writer = csv.writer(f)

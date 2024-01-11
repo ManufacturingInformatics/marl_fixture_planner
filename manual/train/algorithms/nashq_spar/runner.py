@@ -25,14 +25,11 @@ LR = 1e-4
 
 class Runner:
     
-    def __init__(self, run_num):
-        
-        parser = argparse.ArgumentParser()
-        parser.add_argument('--num_agents', type=int)
-        args = parser.parse_args()
+    def __init__(self, **kwargs):
         
         self.config = {}
-        self.run_num = run_num
+        self.run_num = kwarsgs['run_num']
+        self.wandb = kwargs['wandb']
         self.config['loss func'] = torch.nn.SmoothL1Loss()
         self.config['device'] = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         print(f"Using device: {self.config['device']}")
@@ -48,25 +45,24 @@ class Runner:
         self.td_file = f'./runs_csv/wing_spar/marl_{self.env.num_agents}_agents/run_{self.run_num}/td_loss_{datetime.now().strftime("%d-%m-%Y")}.csv'
         self.rewards_file = f'./runs_csv/wing_spar/marl_{self.env.num_agents}_agents/run_{self.run_num}/rewards_{datetime.now().strftime("%d-%m-%Y")}.csv'
         
-        wandb_config = {
-            "learning rate": self.config['LR'],
-            "alpha": self.config['alpha'],
-            "batch_size": self.config['batch size'],
-            "num_agents": self.env.num_agents
-        }
-        
-        wandb.init(
-            project="rl-fixture-tracking", 
-            entity="eytancanzini",
-            name=f"mafd_agents{args.num_agents}_run{self.run_num}",
-            group="wing_spar",
-            job_type="train",
-            config=wandb_config
-        )
-        
-        wandb.define_metric("episode")
-        wandb.define_metric("metrics/return", step_metric="episode")
-        wandb.define_metric("metrics/regret", step_metric="episode")
+        if self.wandb:
+            wandb_config = {
+                "learning rate": self.config['LR'],
+                "alpha": self.config['alpha'],
+                "batch_size": self.config['batch size'],
+                "num_agents": self.env.num_agents
+            }
+            
+            wandb.init(
+                project="rl-fixture-tracking", 
+                entity=args.wandb_name,
+                name=f"mafd_agents{self.env.num_agents}_run{self.run_num}",
+                config=wandb_config
+            )
+            
+            wandb.define_metric("episode")
+            wandb.define_metric("metrics/return", step_metric="episode")
+            wandb.define_metric("metrics/regret", step_metric="episode")
         
         self.agents = {}
         self.agents_offset = {}
@@ -151,12 +147,13 @@ class Runner:
                 
                 obs, reward, done, _ = self.env.step(actions, state)
                 # self.writer.add_scalar("step_reward/train", scalar_value=reward, global_step=self.config['steps done'])
-                wandb.log(
-                    {
-                        "train/step_reward": reward
-                    },
-                    step=self.config['steps done']
-                )
+                if self.wandb:
+                    wandb.log(
+                        {
+                            "train/step_reward": reward
+                        },
+                        step=self.config['steps done']
+                    )
                 
                 agent_losses = []
                 agent_losses.append(self.config['steps done'])
@@ -171,15 +168,15 @@ class Runner:
                     if loss is not None:
                         agent_losses.append(loss.cpu().detach().numpy())
                         # self.writer.add_scalar("train/{}_loss".format(id), scalar_value=loss, global_step=self.config['steps done'])
-                        wandb.log(
-                            {"loss/{}_loss".format(id): loss},
-                            step=self.config['steps done']
-                        )
+                        if self.wandb:
+                            wandb.log(
+                                {"loss/{}_loss".format(id): loss},
+                                step=self.config['steps done']
+                            )
                 
                 with open(self.td_file, 'a', encoding='UTF8') as f:
                     csv_file = csv.writer(f)
-                    csv_file.writerow(agent_losses)
-                                
+                    csv_file.writerow(agent_losses)             
                 
                 postfix['total reward'] += reward
                     
@@ -187,13 +184,14 @@ class Runner:
                 
             postfix['episode regret'] = self.env.num_agents*self.env.num_contexts*self.env.mean_reward - postfix['total reward']*self.env.num_agents
             
-            log_dict = {
-                "episode": i_episode,
-                "metrics/return": postfix['total reward'],
-                "metrics/regret": postfix['episode regret']
-            }
-            
-            wandb.log(log_dict)
+            if self.wandb:
+                log_dict = {
+                    "episode": i_episode,
+                    "metrics/return": postfix['total reward'],
+                    "metrics/regret": postfix['episode regret']
+                }
+                
+                wandb.log(log_dict)
             
             with open(self.rewards_file, 'a') as f:
                 csv_writer = csv.writer(f)

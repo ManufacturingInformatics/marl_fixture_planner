@@ -33,10 +33,10 @@ If you want to replicate our results, we provide network weights for each agent 
 
 ## Brief Synopsis
 
-Fixture layout planning is the process of designing the layout for components undergoing a manufacturing task such as drilling or riveting ([Pehlivan & Summers, 2006](https://www.tandfonline.com/doi/abs/10.1080/00207540600865386)). In this process, the method aims to find positions for fixtures in such a way that they minimise any deformation or residual stresses that the component experiences during the task:
+Fixture layout planning is the process of designing the layout for components undergoing a manufacturing task such as drilling or riveting ([Pehlivan & Summers, 2006](https://www.tandfonline.com/doi/abs/10.1080/00207540600865386)). In this process, the method aims to find positions for fixtures $A^*$ in such a way that they minimise any deformation or residual stresses that the component experiences during the task:
 
 ```math
-\underset{\tau}{\text{minimise }} |f_w(\tau)|
+A^* \in \argmin_{A \subseteq \mathcal{A}} |f_w(\tau)|
 ```
 
 Traditional methods have relied on optimisation techniques that search for a global minima in fixture positions that minimise the experienced deformation. However, these optimisation methods frequently enter local minima and believe they have found the global solution.
@@ -123,7 +123,13 @@ The installation of the packages can be tested by running `import calculateDefor
 
 ### Training
 
-For training the models, we provide a shell script that can be used to start a training process for both the spar and the panel models. Execute the following command in the `/path/to/repo/manual/scripts/` folder:
+For training the models, we provide a shell script that can be used to start a training process for both the spar and the panel models. The script must first be given executable privileges:
+
+```shell
+sudo chmod +x train_mafp.sh
+```
+
+To run the training cycle, execute the following command in the `/path/to/repo/manual/scripts/` folder:
 
 ```shell
 ./train_mafp.sh -e <env> -r <num runs> -n <num agents>
@@ -137,11 +143,31 @@ If you are using [Weights & Biases](https://wandb.ai/site) for logging, there ar
 ./train_mafp.sh -e <env> -r <num runs> -n <num agents> -w -i <wandb identity>
 ```
 
-Where `wandb identity` is your W&B account ID. Project name and run numbers are handled by the program config. All runs save the episodic reward, regret and step TD loss in CSV files, along with a `.pt` file for each agent containing network weights. 
+Where `wandb identity` is your W&B account ID. Project name and run numbers are handled by the program config. All runs save the episodic reward, regret and step TD loss in CSV files, along with a network weights `.pt` file for each agent.
 
 <a id='3d'></a>
 
 ### Inference
+
+Once the agents have been trained, it is possible to run inference on the drilling positions. We provide a shell script to run inference for the agents. Similar to the training process, we first have to enable the script for execution:
+
+```shell
+sudo chmod +x eval_mafp.sh
+```
+
+Now you can run the script itself with the following parameters:
+
+```shell
+./eval_mafp.sh -e <env> -r <num runs> -n <num agents> -a <run name>
+```
+
+The flags `-e -r` and `-n` are identical to the flags in the train script. The main difference is the `-a` flag, which specifies which run you want to use to evaluation.
+
+We provide networks weights for evaluation from our testing. They can be found in the `train/agent_weights` directory. To run the `eval` weights:
+
+```shell
+./eval_mafp.sh -e <env> -r <num runs> -n <num agents> -a eval
+```
 
 <a id='4'></a>
 

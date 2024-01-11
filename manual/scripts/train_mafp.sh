@@ -18,7 +18,7 @@ done
 
 if [ ${wandb} = true ]
 then
-    echo "env is ${env} with ${num_agents} agent(s) for ${num_runs} run(s). Using W&B for logging"
+    echo "Env is ${env} with ${num_agents} agent(s) for ${num_runs} run(s). Using W&B for logging"
     python3 ../train/train_nashq_${env}.py --num_agents ${num_agents} --num_runs ${num_runs} --wandb --entity ${wandb_name}
 else
     echo "Env is ${env} with ${num_agents} agent(s) for ${num_runs} run(s)"
