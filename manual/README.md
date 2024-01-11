@@ -2,7 +2,7 @@
 
 This work is built on two pillars: an FEA simulator developed in MATLAB and a multi-agent reinforcement learning process developed in Python. The system specs that the model was trained on is as follows:
 
-```
+```shell
 OS: Ubuntu 20.04 LTS
 Python Version: 3.10.10
 GPU: NVIDIA GeForce RTX 3080
@@ -18,7 +18,7 @@ For starting the manual installation, firstly the MATALB runtime engine must be 
 
 Once you have downloaded the runtime, you can follow the instructions to install the runtime. The key part is to ensure that you retain the command shown below. This command is non-permanent and needs to be run every time a new terminal window is opened. Alternatively you can add this to your `~/.bashrc`.
 
-```
+```shell
 export LD_LIBRARY_PATH="${LD_LIBRARY_PATH:+${LD_LIBRARY_PATH}:}\ 
   /path/to/install/dir/R2023a/runtime/glnxa64:\
   /path/to/install/dir/R2023a/bin/glnxa64:\
@@ -32,7 +32,7 @@ To install the necessary packages, it is recommended to use a virtual environmen
 
 In the `manual` directory, use the provided `environment.yml` file to install all the necessary Python packages:
 
-```
+```shell
 conda env create -f environment.yml
 ```
 
