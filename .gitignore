@@ -1,1 +1,3 @@
 .vscode
+runs_csv/wing_panel/*
+runs_csv/wing_spar/*

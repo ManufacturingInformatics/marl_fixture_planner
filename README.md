@@ -16,8 +16,10 @@
   - [Training](#3c)
   - [Inference](#3d)
 - [Docker Container](#4)
-- [Troubleshooting](#5)
-- [Citing This Work](#6)
+  - [Setup](#5)
+  - [Usage](#6)
+- [Troubleshooting](#7)
+- [Citing This Work](#8)
 
 <a id='1'></a>
 
@@ -175,9 +177,52 @@ We provide networks weights for evaluation from our testing. They can be found i
 
 <a id='5'></a>
 
-## Troubleshooting
+### Setup
+
+To begin using the provided Dockerfile, you must first ensure that you have the Docker engine installed on your computer. Unlike the manual method above, this method will work on any `x86` operating system that has the Docker runtime. Make sure that you install Docker from this [link](https://docs.docker.com/engine/install/).
+
+The base image we use in our `dockerfile` is a [pre-defined image from NVIDIA](https://hub.docker.com/layers/nvidia/cuda/11.7.1-base-ubuntu20.04/images/sha256-27e5e7a6ab2238a70200083bc841c87dd3b70cac27136a63b4b5b398147ab747) that allows the passthrough of any GPUs in the system for accelerated machine learning. However, to enable this feature the NVIDIA Container Toolkit must be installed on the host machine. Currently this is only support on Linux-based machines. First configure the production repository:
+
+```shell
+curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | sudo gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg \
+  && curl -s -L https://nvidia.github.io/libnvidia-container/stable/deb/nvidia-container-toolkit.list | \
+    sed 's#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g' | \
+    sudo tee /etc/apt/sources.list.d/nvidia-container-toolkit.list
+```
+
+Then run:
+
+```shell
+sudo apt update && sudo apt install -y nvidia-container-toolkit
+```
+
+This installs the toolkit. For a more detailed installation and troubleshooting help, consult NVIDIA's help page: [NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html).
 
 <a id='6'></a>
+
+### Usage
+
+In the top level of this repo, run the docker imaging command for this dockerfile:
+
+```shell
+docker build -f Dockerfile -t mafp .
+```
+
+This process can take a few minutes as the base image is quite large. Once this has finished, execute the following command to run the training method for the agents:
+
+```shell
+docker run --runtime=nvidia --gpus all \
+    mafp \
+    bash -c \
+    "cd /home/code/manual/scripts && \
+    ./train_mafp.sh -e <env> -r <num runs> -n <num agents> -w -i <wandb identity>"
+```
+
+<a id='7'></a>
+
+## Troubleshooting
+
+<a id='8'></a>
 
 ## Citing This Work
 
