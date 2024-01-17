@@ -1,3 +1,4 @@
 .vscode
 runs_csv/wing_panel/*
 runs_csv/wing_spar/*
+/manual/train/algorithms/nashq_panel/__pycache__/*

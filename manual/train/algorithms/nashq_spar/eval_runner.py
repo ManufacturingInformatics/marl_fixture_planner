@@ -118,12 +118,23 @@ class Evaluator:
                     actions_dict[id] = action
                     
                 obs, reward, done, _ = self.env.step(actions, state)
-                
                 postfix['total reward'] += reward
                 
                 with open(self.reward_storage, 'a', encoding='UTF8') as f:
                     csv_file = csv.writer(f)
                     csv_file.writerow([step, reward, obs[0,0], obs[0,1], obs[0,2]])
+                    
+                action_pos = []
+                for i in range(self.env.num_agents):
+                    action_pos.append(self.actions[actions[i], :].tolist())
+                    
+                with open(self.action_storage, 'a', encoding='UTF8') as f:
+                    csv_file = csv.writer(f)
+                    csv_file.writerow([action_pos])
+                    
+                with open(self.context_storage, 'a', encoding='UTF8') as f:
+                    csv_file = csv.writer(f)
+                    csv_file.writerow(state)
                 
             postfix['total regret'] = self.env.num_agents*self.env.num_contexts*self.env.mean_reward - postfix['total reward']*self.env.num_agents
             

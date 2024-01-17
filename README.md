@@ -212,15 +212,32 @@ This process can take a few minutes as the base image is quite large. Once this 
 
 ```shell
 docker run --runtime=nvidia --gpus all \
+    --mount type=bind,source=$PWD,target=/home/code \
     mafp \
     bash -c \
     "cd /home/code/manual/scripts && \
     ./train_mafp.sh -e <env> -r <num runs> -n <num agents> -w -i <wandb identity>"
 ```
 
+When this container exits, the corresponding results files will be stored in the same location as if trained on your host machine in `/manual/runs_csv/`. 
+
+To run the inference step, run a similar command
+
 <a id='7'></a>
 
 ## Troubleshooting
+
+Talk about MATLAB Runtime issues and Docker on WSL not seeing the NVIDIA Container Toolkit.
+
+Also this:
+
+```shell
+docker: Error response from daemon: unknown or invalid runtime name: nvidia. 
+```
+
+Issue with using `--runtime=nvidia` when launching a container. Don't think its needed on WSL 2.
+
+Also talk about Docker image and container sizes. 
 
 <a id='8'></a>
 
