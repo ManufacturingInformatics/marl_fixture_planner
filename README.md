@@ -60,7 +60,7 @@ J(\{a^*_n, \boldsymbol{a}^*_{-n}\}) \leq J(\{a_n, \boldsymbol{a}^*_{-n}\})
 When using robotic fixture elements, the elements can be reconfigured to multiple different drilling tasks and can find optimal fixture plans that can reduce deformation across multiple different positions.
 
 <p align="center">
-  <img src="assets/Multi-Robot Fixtures For Milling.png" width="400">
+  <img src="assets/Multi-Robot Fixtures For Milling.png" width="550">
 </p>
 
 Where the task and component information (GREEN) are combined with reinforcement learning trained multi-agent systems (BLUE) to find fixture plans that reduce deformation across multiple drilling or milling positions (RED).

@@ -14,7 +14,7 @@ This work has only been tested on Ubuntu - there is currently no support for Win
 
 ### MATLAB Runtime Installation
 
-For starting the manual installation, firstly the MATALB runtime engine must be installed as it is used for the FEA simulation within the environment. The version of the runtime that the package was built with is R2023a and can be downloaded from here: [MATLAB Runtime R2023a](https://ssd.mathworks.com/supportfiles/downloads/R2023a/Release/5/deployment_files/installer/complete/win64/MATLAB_Runtime_R2023a_Update_5_win64.zip).
+For starting the manual installation, firstly the MATALB runtime engine must be installed as it is used for the FEA simulation within the environment. The instructions to install the runtime can be found [here](https://uk.mathworks.com/help/compiler/install-the-matlab-runtime.html). The version of the runtime that the package was built with is R2023a and can be downloaded from here: [MATLAB Runtime R2023a](https://ssd.mathworks.com/supportfiles/downloads/R2023a/Release/5/deployment_files/installer/complete/win64/MATLAB_Runtime_R2023a_Update_5_win64.zip).
 
 Once you have downloaded the runtime, you can follow the instructions to install the runtime. The key part is to ensure that you retain the command shown below. This command is non-permanent and needs to be run every time a new terminal window is opened. Alternatively you can add this to your `~/.bashrc`.
 
