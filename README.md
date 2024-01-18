@@ -27,7 +27,7 @@
 
 ## Overview
 
-This is the repository to go along with the paper "Decision Making For Multi-Robot Fixture Planning Using Multi-Agent Reinforcement Learning". This paper provides two representative models of an aerospace wing spar and wing panel and can be used for both training and inference.
+This is the repository to go along with the paper ["Decision Making For Multi-Robot Fixture Planning Using Multi-Agent Reinforcement Learning"](https://doi.org/10.36227/techrxiv.24171534.v1). This paper provides two representative models of an aerospace wing spar and wing panel and can be used for both training and inference.
 
 This repo is split into two sections. The first requires the setup of the MATLAB Runtime and installation of Python packages in a virtual environment. This process is more complicated and may not work on older machines. The second (far easier) method is to use the Docker runtime and provided Docker image to run the training and inference process.
 
@@ -282,7 +282,7 @@ A best practise when using these images and containers is to keep track of conta
 
 ## Citing This Work
 
-If you want to cite this work, please refer to our preprint on TechXriv:
+If you want to cite this work, please refer to our [preprint on TechXriv](https://doi.org/10.36227/techrxiv.24171534.v1) and cite us using the format below:
 
 ```bibtex
  @article{marl_fixtures_preprint_2023, 
