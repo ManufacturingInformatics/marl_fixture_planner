@@ -16,9 +16,11 @@
   - [Training](#3c)
   - [Inference](#3d)
 - [Docker Container](#4)
-  - [Setup](#5)
-  - [Usage](#6)
-- [Troubleshooting](#7)
+  - [Setup](#4a)
+  - [Usage](#4b)
+- [Troubleshooting](#5)
+  - [MATLAB Runtime Issues](#5a)
+  - [Docker Execution Issues](#5b)
 - [Citing This Work](#8)
 
 <a id='1'></a>
@@ -60,6 +62,8 @@ When using robotic fixture elements, the elements can be reconfigured to multipl
 <p align="center">
   <img src="assets/Multi-Robot Fixtures For Milling.png" width="400">
 </p>
+
+Where the task and component information (GREEN) are combined with reinforcement learning trained multi-agent systems (BLUE) to find fixture plans that reduce deformation across multiple drilling or milling positions (RED).
 
 In this work we use reinforcement learning alongside team theory to create a mulit-agent framework for determining optimal fixture placement for multiple drilling tasks on aerospace components.
 
@@ -175,7 +179,7 @@ We provide networks weights for evaluation from our testing. They can be found i
 
 ## Docker Container
 
-<a id='5'></a>
+<a id='4a'></a>
 
 ### Setup
 
@@ -198,7 +202,7 @@ sudo apt update && sudo apt install -y nvidia-container-toolkit
 
 This installs the toolkit. For a more detailed installation and troubleshooting help, consult NVIDIA's help page: [NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html).
 
-<a id='6'></a>
+<a id='4b'></a>
 
 ### Usage
 
@@ -221,25 +225,60 @@ docker run --runtime=nvidia --gpus all \
 
 When this container exits, the corresponding results files will be stored in the same location as if trained on your host machine in `/manual/runs_csv/`. 
 
-To run the inference step, run a similar command
+To run the inference step, run the following command:
 
-<a id='7'></a>
+```shell
+docker run --runtime=nvidia --gpus all \
+    --mount type=bind, source=$PWD,target=/home/code \
+    mafp \
+    bash -c \
+    "cd /home/code/manual/scripts && \
+    ./eval_mafp.sh -e <env> -r <num runs> -n <num agents> -a eval"
+```
+
+As with the training process, all output files are stored in the `manual/runs_csv` folder in this cloned repo.
+
+**NOTE**: Each time these commands are executed, the docker runtime creates a new container with a new ID. These containers should be managed efficiently based on your systems specs. 
+
+<a id='5'></a>
 
 ## Troubleshooting
 
-Talk about MATLAB Runtime issues and Docker on WSL not seeing the NVIDIA Container Toolkit.
+<a id='5a'></a>
 
-Also this:
+### MATLAB Runtime Issues
+
+One of the more common errors is the initialisation of the MATLAB Runtime to run the training and inference scripts. The error has some form of (with variation depending on whether your `LD_LIBRARY_PATH` has contents):
+
+```shell
+RuntimeError: On Linux, you must set the environment variable "LD_LIBRARY_PATH" to a non-empty string. For more details, see the package documentation.
+```
+
+The solution is to ensure that you have installed the MATLAB Runtime as detailed above, and that **you add the MATLAB Runtime to your `LD_LIBRARY_PATH` whenever you open a new terminal window**. To check whether the MATLAB Runtime is on the path, execute the command:
+
+```shell
+echo $LD_LIBRARY_PATH
+```
+
+The response should show the location of the MATLAB Runtime on your system.
+
+<a id='5b'></a>
+
+### Docker Execution Issues
+
+When using the provided Docker container on WSL 2 with Docker Desktop For Windows, the NVIDIA Container Toolkit does not function as the Docker runtime is not installed on the WSL 2 installation. To fix this, you will need to enabled CUDA Acceleration for WSL 2. The full documentation can be found here: [NVIDIA CUDA Acceleration for WSL 2](https://docs.nvidia.com/cuda/wsl-user-guide/index.html). 
+
+With running the containers on WSL 2, another know error occurs during execution of the commands:
 
 ```shell
 docker: Error response from daemon: unknown or invalid runtime name: nvidia. 
 ```
 
-Issue with using `--runtime=nvidia` when launching a container. Don't think its needed on WSL 2.
+When using WSL 2 and the NVIDIA CUDA acceleration layer, the `--runtime=nvidia` flag is not needed as the NVIDIA Container runtime is not installed. Therefore it can be removed when working on WSL 2
 
-Also talk about Docker image and container sizes. 
+A best practise when using these images and containers is to keep track of container sizes. The size of some of the containers and images can reach 25 GB, and the Docker build command provided creates a new container each time. Therefore, it is heavily advised to remove older containers and images that are not being used before creating new ones.  
 
-<a id='8'></a>
+<a id='6'></a>
 
 ## Citing This Work
 
