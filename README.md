@@ -229,7 +229,7 @@ To run the inference step, run the following command:
 
 ```shell
 docker run --runtime=nvidia --gpus all \
-    --mount type=bind, source=$PWD,target=/home/code \
+    --mount type=bind,source=$PWD,target=/home/code \
     mafp \
     bash -c \
     "cd /home/code/manual/scripts && \
