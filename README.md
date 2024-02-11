@@ -288,7 +288,7 @@ If you want to cite this work, please refer to our [preprint on TechXriv](https:
  @article{marl_fixtures_preprint_2023, 
     type={preprint}, 
     title={Decision Making For Multi-Robot Fixture Planning Using Multi Agent Reinforcement Learning}, 
-    DOI={10.36227/techrxiv.24171534.v1}, 
+    DOI={10.36227/techrxiv.24171534.v2}, 
     publisher={TechRxiv}, 
     author={Canzini, Ethan and Auledas Noguera, Marc and Pope, Simon and Tiwari, Ashutosh}, 
     year={2023}, 
