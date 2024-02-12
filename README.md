@@ -1,7 +1,7 @@
 # Decision Making For Multi-Robot Fixture Planning Using Multi-Agent Reinforcement Learning
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![DOI](https://zenodo.org/badge/144605189.svg)](https://doi.org/10.36227/techrxiv.24171534.v2)
+[![DOI](https://doi.org/10.36227/techrxiv.24171534.v2)](https://doi.org/10.36227/techrxiv.24171534.v2)
 
 <p align="center">
   <img src="assets/mafp_architecture.png" width="700">
