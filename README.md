@@ -2,6 +2,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![TechRxiv](https://img.shields.io/badge/arXiv-techrxiv.24171534-b31b1b.svg?style=plastic)](https://doi.org/10.36227/techrxiv.24171534.v2)
+[![CC BY 4.0][cc-by-shield]][cc-by]
 
 <p align="center">
   <img src="assets/mafp_architecture.png" width="700">
