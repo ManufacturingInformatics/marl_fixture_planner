@@ -1,11 +1,13 @@
 # Decision Making For Multi-Robot Fixture Planning Using Multi-Agent Reinforcement Learning
 
-[![TechRxiv](https://img.shields.io/badge/arXiv-techrxiv.24171534-b31b1b.svg?style=plastic)](https://doi.org/10.36227/techrxiv.24171534.v2)
+[![DOI](https://zenodo.org/badge/DOI/10.1109/TASE.2024.34246771.svg)](https://doi.org/10.1109/TASE.2024.34246771)
 [![CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](http://creativecommons.org/licenses/by/4.0/])
 
 <p align="center">
   <img src="assets/mafp_architecture.png" width="700">
 </p>
+
+**UPDATE 18/07/2024:** Our work was accepted for publication in IEEE Transactions on Automation Science & Engineering!
 
 ## Contents
 
@@ -28,7 +30,7 @@
 
 ## Overview
 
-This is the repository to go along with the paper ["Decision Making For Multi-Robot Fixture Planning Using Multi-Agent Reinforcement Learning"](https://doi.org/10.36227/techrxiv.24171534.v1). This paper provides two representative models of an aerospace wing spar and wing panel and can be used for both training and inference.
+This is the repository to go along with the paper ["Decision Making For Multi-Robot Fixture Planning Using Multi-Agent Reinforcement Learning"](https://doi.org/10.1109/TASE.2024.34246771). This paper provides two representative models of an aerospace wing spar and wing panel and can be used for both training and inference.
 
 This repo is split into two sections. The first requires the setup of the MATLAB Runtime and installation of Python packages in a virtual environment. This process is more complicated and may not work on older machines. The second (far easier) method is to use the Docker runtime and provided Docker image to run the training and inference process.
 
@@ -283,18 +285,16 @@ A best practise when using these images and containers is to keep track of conta
 
 ## Citing This Work
 
-If you want to cite this work, please refer to our [preprint on TechXriv](https://doi.org/10.36227/techrxiv.24171534.v1) and cite us using the format below:
+If you want to cite this work, please refer to our [full paper in IEEE T-ASE](https://doi.org/10.1109/TASE.2024.3424677) and cite us using the format below:
 
 ```bibtex
  @article{marl_fixtures_preprint_2023, 
-    type={preprint}, 
-    title={Decision Making For Multi-Robot Fixture Planning Using Multi Agent Reinforcement Learning}, 
-    DOI={10.36227/techrxiv.24171534.v2}, 
-    publisher={TechRxiv}, 
-    author={Canzini, Ethan and Auledas Noguera, Marc and Pope, Simon and Tiwari, Ashutosh}, 
-    year={2023}, 
-    month=oct, 
-    language={en} 
+     title={Decision Making for Multi-Robot Fixture Planning Using Multi-Agent Reinforcement Learning}, 
+     rights={All rights reserved}, 
+     ISSN={1558-3783}, 
+     DOI={10.1109/TASE.2024.3424677}, 
+     journal={IEEE Transactions on Automation Science and Engineering}, 
+     author={Canzini, Ethan and Auledas-Noguera, Marc and Pope, Simon and Tiwari, Ashutosh}, year={2024}, pages={1–12}
  }
 ```
 
