@@ -288,7 +288,7 @@ A best practise when using these images and containers is to keep track of conta
 If you want to cite this work, please refer to our [full paper in IEEE T-ASE](https://doi.org/10.1109/TASE.2024.3424677) and cite us using the format below:
 
 ```bibtex
- @article{marl_fixtures_preprint_2023, 
+ @article{marl_fixtures_2023, 
      title={Decision Making for Multi-Robot Fixture Planning Using Multi-Agent Reinforcement Learning}, 
      rights={All rights reserved}, 
      ISSN={1558-3783}, 
