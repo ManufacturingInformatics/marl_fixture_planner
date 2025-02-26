@@ -298,4 +298,4 @@ If you want to cite this work, please refer to our [full paper in IEEE T-ASE](ht
  }
 ```
 
-Any questions, please forward them to: <ecanzini1@sheffield.ac.uk>. If you want to use our approach and want advice, feel free to reach out! Pull requests for other functionality (new models, different RL algorithms, bug fixes etc.) are welcome.
+Any questions, please forward them to: <e.a.canzini@sheffield.ac.uk>. If you want to use our approach and want advice, feel free to reach out! Pull requests for other functionality (new models, different RL algorithms, bug fixes etc.) are welcome.
